@@ -27,7 +27,9 @@ describe('ResultList', () => {
 
   it('shows result count', () => {
     const venues = [makeVenue('1', 'Pub One'), makeVenue('2', 'Pub Two')];
-    render(<ResultList venues={venues} selectedId={null} onSelect={() => {}} />);
-    expect(screen.getByText(/2 quizzes found/i)).toBeInTheDocument();
+    const { container } = render(<ResultList venues={venues} selectedId={null} onSelect={() => {}} />);
+    // count spans multiple elements (<strong> + text), match on container textContent
+    const header = container.querySelector('.border-b') as HTMLElement;
+    expect(header.textContent).toMatch(/2 quizzes found/i);
   });
 });

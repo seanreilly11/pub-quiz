@@ -13,7 +13,8 @@ export default function ResultList({ venues, selectedId, onSelect }: Props) {
   return (
     <div className="w-full md:w-[340px] bg-bottle border-l border-line flex flex-col overflow-hidden flex-shrink-0">
       <div className="px-4 py-3 border-b border-line text-[12px] text-chalk-dim flex-shrink-0">
-        {`${venues.length} ${venues.length === 1 ? 'quiz' : 'quizzes'} found`}
+        <strong className="text-chalk">{venues.length}</strong>{' '}
+        {venues.length === 1 ? 'quiz' : 'quizzes'} found
       </div>
 
       <div className="flex-1 overflow-y-auto p-2 flex flex-col gap-1.5">

@@ -28,3 +28,8 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}

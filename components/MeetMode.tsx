@@ -21,7 +21,7 @@ export default function MeetMode() {
   }, [friends.length]);
 
   const mid = friends.length >= 2 ? midpoint(friends) : null;
-  const allVenues = getVenues();
+  const allVenues = getVenues({ within: 99 });
 
   const ranked = mid
     ? [...allVenues]
@@ -75,7 +75,7 @@ export default function MeetMode() {
           </div>
         )}
 
-        {friends.length > 0 && friends.length < 4 && (
+        {friends.length > 0 && (
           <button
             onClick={() => setFriends([])}
             className="absolute top-3 right-3 text-[11px] text-chalk-dim border border-line rounded-lg px-3 py-1.5 bg-bottle/90 hover:border-brass hover:text-brass transition-colors"

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import ListingDetailStatic from '@/components/ListingDetailStatic';
@@ -32,9 +33,9 @@ export default async function ListingPage({ params }: { params: Promise<Params> 
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1 max-w-xl mx-auto w-full px-4 py-6">
-        <a href="/" className="text-[12px] text-chalk-dim hover:text-chalk mb-4 inline-block transition-colors">
+        <Link href="/" className="text-[12px] text-chalk-dim hover:text-chalk mb-4 inline-block transition-colors">
           ← All quizzes
-        </a>
+        </Link>
         <ListingDetailStatic venue={venue} distanceMiles={distanceMiles} />
       </main>
     </div>

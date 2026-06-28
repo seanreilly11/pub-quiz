@@ -11,7 +11,7 @@ interface Props {
 
 export default function ResultList({ venues, selectedId, onSelect }: Props) {
   return (
-    <div className="w-full md:w-[340px] bg-bottle border-l border-line flex flex-col overflow-hidden flex-shrink-0">
+    <div className="w-full md:w-[340px] bg-bottle md:border-l border-line flex flex-col overflow-hidden flex-shrink-0">
       <div className="px-4 py-3 border-b border-line text-[12px] text-chalk-dim flex-shrink-0">
         <strong className="text-chalk">{venues.length}</strong>{' '}
         {venues.length === 1 ? 'quiz' : 'quizzes'} found

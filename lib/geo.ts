@@ -1,5 +1,5 @@
-const USER_LAT = 51.4545;
-const USER_LNG = -2.5879;
+export const USER_LAT = 51.4545;
+export const USER_LNG = -2.5879;
 
 export function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371;

@@ -95,7 +95,7 @@ function withDistance(venues: TriviaVenue[]): VenueWithDistance[] {
 }
 
 export function getVenues(filters: Partial<FilterState> = {}): VenueWithDistance[] {
-  const { day = 'any', within = 5, q = '' } = filters;
+  const { day = 'any', within = 3, q = '' } = filters;
   const lower = q.toLowerCase();
 
   return withDistance(

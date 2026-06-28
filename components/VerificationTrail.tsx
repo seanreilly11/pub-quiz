@@ -39,9 +39,9 @@ export default function VerificationTrail({ verification, domain }: Props) {
       <p className="font-display text-[10px] tracking-[1.5px] uppercase text-chalk-dim mb-3">
         How we know
       </p>
-      <div className="flex flex-col">
+      <ol className="flex flex-col list-none p-0 m-0">
         {steps.map((step, i) => (
-          <div key={i} className="flex gap-3">
+          <li key={step.title} className="flex gap-3">
             <div className="flex flex-col items-center">
               <div
                 className={[
@@ -57,9 +57,9 @@ export default function VerificationTrail({ verification, domain }: Props) {
               <p className="text-[12px] font-semibold text-chalk">{step.title}</p>
               <p className="text-[11px] text-chalk-dim mt-0.5">{step.sub}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   );
 }

@@ -17,6 +17,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Round Two — Bristol Pub Quiz Nights',
   description: 'Find accurate, verified pub quiz nights in Bristol. Every listing checked with the pub.',
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: 'Round Two — Bristol Pub Quiz Nights',
+    description: 'Find accurate, verified pub quiz nights in Bristol.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
-import ListingDetail from '@/components/ListingDetail';
+import ListingDetailStatic from '@/components/ListingDetailStatic';
 import { getVenueBySlug, getVenues } from '@/lib/data';
 import { distanceMilesFromUser } from '@/lib/geo';
 
@@ -35,7 +35,7 @@ export default async function ListingPage({ params }: { params: Promise<Params> 
         <a href="/" className="text-[12px] text-chalk-dim hover:text-chalk mb-4 inline-block transition-colors">
           ← All quizzes
         </a>
-        <ListingDetail venue={venue} distanceMiles={distanceMiles} onClose={() => {}} />
+        <ListingDetailStatic venue={venue} distanceMiles={distanceMiles} />
       </main>
     </div>
   );

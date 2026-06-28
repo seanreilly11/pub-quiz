@@ -10,7 +10,6 @@ import MobileBottomSheet from './MobileBottomSheet';
 import MapView from './MapView';
 import ResultList from './ResultList';
 import ListingDetail from './ListingDetail';
-import VenueCard from './VenueCard';
 import { getVenues } from '@/lib/data';
 import type { FilterState } from '@/lib/types';
 
@@ -95,10 +94,8 @@ export default function HomeClient({ initialFilters }: Props) {
 
         {/* Mobile list view */}
         {mobileView === 'list' && (
-          <div className="flex-1 overflow-y-auto p-2 flex flex-col gap-1.5 md:hidden">
-            {venues.map(v => (
-              <VenueCard key={v.id} venue={v} selected={v.id === selectedId} onClick={() => handleSelect(v.id)} />
-            ))}
+          <div className="flex-1 overflow-hidden md:hidden">
+            <ResultList venues={venues} selectedId={selectedId} onSelect={handleSelect} />
           </div>
         )}
 

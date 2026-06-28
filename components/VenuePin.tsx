@@ -1,6 +1,7 @@
 'use client';
 
 import type { TriviaVenue } from '@/lib/types';
+import { DAY_LABELS } from '@/lib/days';
 
 interface Props {
   venue: TriviaVenue;
@@ -14,7 +15,7 @@ export default function VenuePin({ venue, selected, onClick }: Props) {
   return (
     <button
       onClick={onClick}
-      aria-label={`${venue.name} — ${venue.day} ${venue.startTime}, ${isConfirmed ? 'confirmed' : 'from website'}`}
+      aria-label={`${venue.name} — ${DAY_LABELS[venue.day]} ${venue.startTime}, ${isConfirmed ? 'confirmed' : 'from website'}`}
       className={[
         'rounded-[50%_50%_50%_0] -rotate-45 transition-all cursor-pointer border-0',
         isConfirmed ? 'bg-confirmed' : 'bg-website',

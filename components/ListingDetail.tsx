@@ -3,12 +3,8 @@
 import { X, Globe } from 'lucide-react';
 import TrustStamp from './TrustStamp';
 import VerificationTrail from './VerificationTrail';
-import type { TriviaVenue, DayKey } from '@/lib/types';
-
-const DAY_FULL: Record<DayKey, string> = {
-  mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday',
-  fri: 'Friday', sat: 'Saturday', sun: 'Sunday',
-};
+import type { TriviaVenue } from '@/lib/types';
+import { DAY_FULL } from '@/lib/days';
 
 interface Field { label: string; value: string; accent?: boolean }
 

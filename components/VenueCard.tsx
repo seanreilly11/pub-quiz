@@ -2,12 +2,7 @@
 
 import TrustPill from './TrustPill';
 import type { VenueWithDistance } from '@/lib/data';
-import type { DayKey } from '@/lib/types';
-
-const DAY_LABELS: Record<DayKey, string> = {
-  mon: 'Mon', tue: 'Tue', wed: 'Wed', thu: 'Thu',
-  fri: 'Fri', sat: 'Sat', sun: 'Sun',
-};
+import { DAY_LABELS } from '@/lib/days';
 
 interface Props {
   venue: VenueWithDistance;

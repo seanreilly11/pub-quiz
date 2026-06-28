@@ -11,11 +11,11 @@ export default function Legend({ className = '' }: Props) {
       ].join(' ')}
     >
       {[
-        { color: 'bg-confirmed', label: 'Checked with pub' },
-        { color: 'bg-website', label: 'From their website' },
-      ].map(({ color, label }) => (
+        { color: 'bg-confirmed', shape: 'rounded-full', label: 'Checked with pub' },
+        { color: 'bg-website', shape: 'rounded-sm', label: 'From their website' },
+      ].map(({ color, shape, label }) => (
         <div key={label} className="flex items-center gap-2 text-[11px] text-chalk-dim">
-          <div className={`w-2.5 h-2.5 rounded-full ${color}`} aria-hidden="true" />
+          <div className={`w-2.5 h-2.5 ${shape} ${color}`} aria-hidden="true" />
           {label}
         </div>
       ))}

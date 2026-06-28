@@ -38,6 +38,16 @@ Round Two is a pub quiz night finder for Bristol. The UI's core job is making ac
 
 Restrained. Pins drop-in staggered on load; selected pin scales up; trust stamp "presses in" on detail open; card hover lifts. All animations respect `prefers-reduced-motion`.
 
+### Responsive approach
+
+**Mobile-first throughout.** All CSS starts from the smallest viewport and adds complexity upward via `min-width` breakpoints — never `max-width` overrides.
+
+- Spacing and font sizes use `rem` (base 16px) so they scale with user font preferences
+- Layout widths use `%` or `fr` units; fixed `px` widths only for minimum touch targets (44px) and map legend overlays
+- Breakpoints: `md` = `768px` (tablet/desktop split), `lg` = `1024px` (wide desktop)
+- Tailwind classes written mobile-first: base class = mobile, `md:` = desktop enhancement (e.g. `flex-col md:flex-row`)
+- The detail panel and result list are `hidden md:flex` — they don't exist in the DOM on mobile, replaced by the bottom sheet
+
 ---
 
 ## Routes
@@ -53,13 +63,42 @@ Restrained. Pins drop-in staggered on load; selected pin scales up; trust stamp 
 
 ## Screen 1: Home (`/`)
 
-### Layout (desktop)
+Design is **mobile-first**. The mobile layout is the base; desktop adds panels without changing any component behaviour.
+
+### Mobile layout (base)
+
+```
+┌──────────────────────┐
+│ ROUND TWO      [🔍]  │  ← header
+├──────────────────────┤
+│ [Any][Mon][Tue][Wed]→│  ← day chips (horizontal scroll)
+├──────────────────────┤
+│  [Map]   [List]      │  ← view toggle
+├──────────────────────┤
+│                      │
+│   MAP — full screen  │  (Map view active)
+│   ● ●   ◉  ●        │
+│                      │
+│ ┌────────────────┐   │
+│ │ 9 quizzes  ╌╌╌│   │  ← bottom sheet peeks up
+│ │ [card] [card]  │   │
+│ └────────────────┘   │
+└──────────────────────┘
+```
+
+- **Map view (default):** Full-screen map. Bottom sheet peeks up showing count + top 2 cards; drag up to reveal full scrollable list.
+- **List view:** Full-screen scrollable card list, map hidden.
+- **Day chips** scroll horizontally in a single row (no wrap).
+- **Within slider + search** are tucked behind a filter icon (🔍) in the header to keep the rail compact on mobile. Tapping opens a bottom sheet with both controls.
+- **Detail:** Tapping a card or pin slides a full-screen bottom sheet up from the bottom with all listing fields, trust stamp, and verification trail. Swipe down or × to dismiss.
+
+### Desktop enhancement (`md` breakpoint and up)
 
 ```
 ┌─────────────────────────────────────────────────────┐
 │ ROUND TWO              [Meet in the middle →]        │  ← header (52px)
-├────────────────────────────────────────────────────—┤
-│ Night: [Any][Mon][Tue]…  Within: ──●── 3mi  [🔍 …] │  ← filter rail
+├─────────────────────────────────────────────────────┤
+│ Night: [Any][Mon][Tue]…  Within: ──●── 3mi  [🔍 …] │  ← filter rail (all controls visible)
 ├──────────────────────────┬──────────────┬────────────┤
 │                          │              │            │
 │   MAP (Mapbox dark)      │   DETAIL     │  RESULTS   │
@@ -69,13 +108,16 @@ Restrained. Pins drop-in staggered on load; selected pin scales up; trust stamp 
 └──────────────────────────┴──────────────┴────────────┘
 ```
 
-The detail overlay slides in between map and list when a pin or card is selected. On desktop all three panels coexist.
+- Map/List toggle disappears; all three panels coexist.
+- Filter rail shows all controls inline (no collapsed sheet).
+- Detail overlay slides in between map and list panel when a pin or card is selected.
+- "Meet in the middle" nav link visible in header.
 
 ### Header
 
 - Wordmark `ROUND TWO` in Oswald/brass, uppercase, tracked
-- Tagline `Bristol pub quiz nights` in chalk/dim beside it
-- "Meet in the middle" link (icon + text), right-aligned
+- Tagline `Bristol pub quiz nights` in chalk/dim (hidden on mobile to save space)
+- "Meet in the middle" link right-aligned (desktop); replaced by 🔍 filter icon (mobile)
 
 ### Filter Rail
 
@@ -89,10 +131,10 @@ The detail overlay slides in between map and list when a pin or card is selected
 - Mapbox GL JS, custom dark style matching ink/bottle palette
 - One pin per venue; pins are `border-radius: 50% 50% 50% 0; transform: rotate(-45deg)` drop-pin shape
 - **Green pin** (`confirmed`) = pub replied to confirm; **amber pin** (`website`) = from their site only
-- Selected pin scales up with a glow ring; selecting a pin cross-highlights its card and opens the detail overlay
+- Selected pin scales up with a glow ring; selecting a pin cross-highlights its card and opens detail
 - Legend overlay (top-left): `● Checked with pub / ● From their website`
 
-### Result List (340px right panel)
+### Result List
 
 Scrollable list of `VenueCard` components sorted by distance.
 
@@ -106,7 +148,7 @@ Shape (solid vs dashed) distinguishes states independently of colour for colourb
 
 **Empty state:** "No quizzes match. Try another night or widen the distance."
 
-### Detail Overlay (400px, slides in from left of list)
+### Detail (bottom sheet on mobile / overlay panel on desktop)
 
 Shows all MVP fields when a venue is selected.
 
@@ -125,7 +167,7 @@ Shows all MVP fields when a venue is selected.
 
 **Website CTA:** full-width brass button `Visit their website →`.
 
-**Close:** × button top-right.
+**Close:** × button top-right (desktop) / swipe down (mobile).
 
 ---
 
@@ -139,43 +181,55 @@ Server-rendered. Uses the same `ListingDetail` component as the overlay — no s
 
 **Preview banner** (brass tint, full width below header): `PREVIEW · Drop a pin for each mate and we'll find the fairest quiz for everyone.`
 
-### Layout
+### Mobile layout (base)
+
+```
+┌──────────────────────┐
+│ ROUND TWO   [← Back] │  ← header
+├──────────────────────┤
+│ ▒ PREVIEW  Drop …    │  ← preview banner
+├──────────────────────┤
+│                      │
+│   MAP — full screen  │
+│   ● You              │
+│   ···> ◎ midpoint    │
+│        ···> ● Ash    │
+│   ● Roz   [+] add   │
+│                      │
+│ ┌────────────────┐   │
+│ │ Fairest for…   │   │  ← bottom sheet peeks
+│ │ 1. Quill & Q ★ │   │
+│ │ 2. Foxed Badger│   │
+│ └────────────────┘   │
+└──────────────────────┘
+```
+
+- Map fills the screen; ranked results peek up in a bottom sheet (drag up for full list)
+- Friend pins placed by tapping the map; `[+]` placeholder pin invites adding more
+
+### Desktop enhancement
 
 ```
 ┌──────────────────────────┬──────────────────┐
-│                          │ Fairest for      │
-│   MAP                    │ everyone         │
-│   ● You  ● Ash  ● Roz   │ ─────────────    │
-│   ···> ◎ midpoint <···   │ 1. Quill & Q.   │
-│   · venue dots ·         │    ★ Fairest     │
+│   MAP                    │ Fairest for      │
+│   ● You  ● Ash  ● Roz   │ everyone         │
+│   ···> ◎ midpoint <···   │ ─────────────    │
+│   · venue dots ·         │ 1. Quill & Q. ★ │
 │   [+] add mate           │ 2. Foxed Badger  │
 │                          │ 3. Anchor & C.   │
-│                          │                  │
-│                          │ Drop pins on     │
-│                          │ the map (up to 4)│
 └──────────────────────────┴──────────────────┘
 ```
+
+- Ranked results move to a fixed right panel (same width as the result list on `/`)
+
+### Shared behaviour (all viewports)
 
 - Each person gets a colour-coded circle pin (You = brass, others = purple/pink/teal)
 - Dashed lines connect each person's pin to the computed centroid
 - Centroid shown as an amber ring marker with `MIDPOINT` label
 - Venue dots (green) appear near midpoint; closest to midpoint = #1
-- Right panel: ranked list, #1 gets "Fairest for everyone" badge in confirmed-green
-- `[+]` empty-slot pin (dashed outline) invites adding more friends
-
----
-
-## Mobile (`/` — responsive breakpoint)
-
-Below the filter rail, a **Map / List toggle** replaces the split layout.
-
-**Map view:** Full-screen map with a bottom sheet that peeks up showing count + top 2 cards. Sheet can be dragged up to reveal full list.
-
-**List view:** Full-screen scrollable card list, no map visible.
-
-**Detail:** Tapping a card or pin opens a full-screen bottom sheet with all listing detail fields, trust stamp, and verification trail. Sheet slides up from bottom; swipe down or × to dismiss.
-
-Filter chips scroll horizontally (single row, no wrap) to keep the rail compact.
+- #1 gets "Fairest for everyone" badge in confirmed-green
+- `[+]` empty-slot pin (dashed outline) invites adding more friends (max 4)
 
 ---
 

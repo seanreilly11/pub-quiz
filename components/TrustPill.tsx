@@ -19,8 +19,8 @@ export default function TrustPill({ source, date }: Props) {
     >
       <span
         className={[
-          'w-1.5 h-1.5 rounded-full flex-shrink-0',
-          isConfirmed ? 'bg-confirmed' : 'bg-website',
+          'w-1.5 h-1.5 flex-shrink-0',
+          isConfirmed ? 'bg-confirmed rounded-full' : 'bg-website rounded-sm',
         ].join(' ')}
         aria-hidden="true"
       />

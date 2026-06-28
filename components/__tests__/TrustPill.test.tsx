@@ -30,3 +30,14 @@ describe('TrustPill — website', () => {
     expect(el.className).toMatch(/border-dashed/);
   });
 });
+
+describe('TrustPill — dot shape accessibility', () => {
+  it('confirmed dot is round, website dot is square (colourblind-safe)', () => {
+    const { container: c1 } = render(<TrustPill source="pub" date="12 Jun" />);
+    const { container: c2 } = render(<TrustPill source="website" date="2 Apr" />);
+    const dot1 = c1.querySelector('[aria-hidden="true"]') as HTMLElement;
+    const dot2 = c2.querySelector('[aria-hidden="true"]') as HTMLElement;
+    expect(dot1.className).toMatch(/rounded-full/);
+    expect(dot2.className).not.toMatch(/rounded-full/);
+  });
+});

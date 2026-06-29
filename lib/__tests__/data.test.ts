@@ -24,8 +24,8 @@ describe('getVenues', () => {
   });
 
   it('filters by search query (area)', () => {
-    const results = getVenues({ q: 'clifton' });
-    expect(results.some(v => v.area.toLowerCase().includes('clifton'))).toBe(true);
+    const results = getVenues({ q: 'shoreditch' });
+    expect(results.some(v => v.area.toLowerCase().includes('shoreditch'))).toBe(true);
   });
 
   it('returns empty array when nothing matches', () => {
@@ -43,12 +43,12 @@ describe('getVenues', () => {
 
 describe('getVenueBySlug', () => {
   it('finds a venue by city and slug', () => {
-    const v = getVenueBySlug('bristol', 'foxed-badger');
+    const v = getVenueBySlug('london', 'foxed-badger');
     expect(v).toBeDefined();
     expect(v!.name).toBe('The Foxed Badger');
   });
 
   it('returns undefined for unknown slug', () => {
-    expect(getVenueBySlug('bristol', 'nope')).toBeUndefined();
+    expect(getVenueBySlug('london', 'nope')).toBeUndefined();
   });
 });

@@ -7,7 +7,7 @@ import { getVenues } from '@/lib/data';
 import { midpoint, haversineKm, kmToMiles, USER_LAT, USER_LNG } from '@/lib/geo';
 
 const COLORS = ['bg-brass text-ink', 'bg-[#7c6af7] text-white', 'bg-[#e06d9a] text-white', 'bg-[#4ac0c0] text-ink'];
-const BRISTOL_CENTER = { longitude: USER_LNG, latitude: USER_LAT };
+const LONDON_CENTER = { longitude: USER_LNG, latitude: USER_LAT };
 
 interface Friend { lat: number; lng: number }
 
@@ -35,7 +35,7 @@ export default function MeetMode() {
       <div className="flex-1 relative">
         <Map
           mapboxAccessToken={token}
-          initialViewState={{ ...BRISTOL_CENTER, zoom: 12 }}
+          initialViewState={{ ...LONDON_CENTER, zoom: 12 }}
           style={{ width: '100%', height: '100%' }}
           mapStyle="mapbox://styles/mapbox/dark-v11"
           onClick={handleMapClick}

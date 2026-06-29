@@ -4,8 +4,8 @@ import ResultList from '../ResultList';
 import type { VenueWithDistance } from '@/lib/data';
 
 const makeVenue = (id: string, name: string): VenueWithDistance => ({
-  id, slug: id, name, area: 'Area', city: 'Bristol',
-  lat: 51.45, lng: -2.59, day: 'mon', startTime: '8pm',
+  id, slug: id, name, area: 'Area', city: 'London',
+  lat: 51.5160, lng: -0.0930, day: 'mon', startTime: '8pm',
   frequency: 'Weekly', entryFeeRaw: 'Free', bookingRequired: false,
   host: 'In-house', generalNotes: '', websiteUrl: 'https://x.co',
   verification: { source: 'pub', foundDate: '1 Jan', emailDate: '2 Jan', confirmedDate: '3 Jan' },

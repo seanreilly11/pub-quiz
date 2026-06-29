@@ -9,7 +9,7 @@ export default function Header() {
           Round Two
         </span>
         <span className="hidden md:inline text-chalk-dim text-sm">
-          Bristol pub quiz nights
+          London pub quiz nights
         </span>
       </div>
 

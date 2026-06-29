@@ -15,12 +15,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Round Two — Bristol Pub Quiz Nights',
-  description: 'Find accurate, verified pub quiz nights in Bristol. Every listing checked with the pub.',
+  title: 'Round Two — London Pub Quiz Nights',
+  description: 'Find accurate, verified pub quiz nights in London. Every listing checked with the pub.',
   robots: { index: true, follow: true },
   openGraph: {
-    title: 'Round Two — Bristol Pub Quiz Nights',
-    description: 'Find accurate, verified pub quiz nights in Bristol.',
+    title: 'Round Two — London Pub Quiz Nights',
+    description: 'Find accurate, verified pub quiz nights in London.',
     type: 'website',
   },
 };

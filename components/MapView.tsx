@@ -7,7 +7,7 @@ import Legend from './Legend';
 import { USER_LAT, USER_LNG } from '@/lib/geo';
 import type { VenueWithDistance } from '@/lib/data';
 
-const BRISTOL_CENTER = { longitude: USER_LNG, latitude: USER_LAT };
+const LONDON_CENTER = { longitude: USER_LNG, latitude: USER_LAT };
 
 interface Props {
   venues: VenueWithDistance[];
@@ -22,7 +22,7 @@ export default function MapView({ venues, selectedId, onSelect }: Props) {
     <div className="relative flex-1 overflow-hidden">
       <Map
         mapboxAccessToken={token}
-        initialViewState={{ ...BRISTOL_CENTER, zoom: 13 }}
+        initialViewState={{ ...LONDON_CENTER, zoom: 13 }}
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
       >

@@ -28,7 +28,7 @@ export default function ListingDetail({ venue, distanceMiles, onClose }: Props) 
 
   return (
     <div className="relative flex flex-col h-full bg-bottle">
-      <div className="flex-1 overflow-y-auto p-5">
+      <div className="flex-1 overflow-y-auto p-5 scrollbar-green">
         <button
           onClick={onClose}
           aria-label="Close"

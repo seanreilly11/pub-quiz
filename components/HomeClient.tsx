@@ -31,17 +31,15 @@ export default function HomeClient({ initialFilters }: Props) {
 
   const updateFilter = useCallback(
     (patch: Partial<FilterState>) => {
-      setFilters(prev => {
-        const next = { ...prev, ...patch };
-        const params = new URLSearchParams();
-        if (next.day !== 'any') params.set('day', next.day);
-        if (next.within !== 3) params.set('within', String(next.within));
-        if (next.q) params.set('q', next.q);
-        router.replace(`/?${params.toString()}`, { scroll: false });
-        return next;
-      });
+      setFilters(prev => ({ ...prev, ...patch }));
+      const next = { ...filters, ...patch };
+      const params = new URLSearchParams();
+      if (next.day !== 'any') params.set('day', next.day);
+      if (next.within !== 3) params.set('within', String(next.within));
+      if (next.q) params.set('q', next.q);
+      router.replace(`/?${params.toString()}`, { scroll: false });
     },
-    [router]
+    [filters, router]
   );
 
   const handleSelect = useCallback((id: string) => {
